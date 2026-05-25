@@ -1,89 +1,65 @@
-const themes = {
-    light: {
-        '--bg-primary': '#ffffff',
-        '--bg-secondary': '#f5f5f5',
-        '--bg-card': '#f9f9f9',
-        '--text-primary': '#333333',
-        '--text-secondary': '#666666',
-        '--text-muted': '#999999',
-        '--border-color': '#e0e0e0',
-        '--sidebar-bg': '#f8f9fa',
-        '--gradient-start': '#667eea',
-        '--gradient-end': '#764ba2',
-        '--accent-color': '#FF416C',
-        '--overlay-bg': 'linear-gradient(to right, #FF4B2B, #FF416C)',
-        '--login-gradient-start': '#6900f1',
-        '--login-gradient-mid': '#522183',
-        '--login-gradient-end': '#260844',
-        '--input-bg': '#eeeeee'
-    },
-    dark: {
-        '--bg-primary': '#1a1a2e',
-        '--bg-secondary': '#16213e',
-        '--bg-card': '#0f0f1f',
-        '--text-primary': '#ffffff',
-        '--text-secondary': '#e0e0e0',
-        '--text-muted': '#a0a0a0',
-        '--border-color': '#2a2a3a',
-        '--sidebar-bg': '#0a0a1a',
-        '--gradient-start': '#1e1e2f',
-        '--gradient-end': '#2d2d44',
-        '--accent-color': '#FF416C',
-        '--overlay-bg': 'linear-gradient(to right, #FF4B2B, #FF416C)',
-        '--login-gradient-start': '#2d0b5e',
-        '--login-gradient-mid': '#1f0a3a',
-        '--login-gradient-end': '#0f0520',
-        '--input-bg': '#2a2a3a'
-    }
-};
+// theme.js - Sistema de temas claro/oscuro
 
-let currentTheme = localStorage.getItem('theme') || 'light';
-
-function applyTheme(theme) {
-    const themeColors = themes[theme];
-    if (!themeColors) return;
-    
-    Object.keys(themeColors).forEach(variable => {
-        document.documentElement.style.setProperty(variable, themeColors[variable]);
-    });
-    
-    localStorage.setItem('theme', theme);
-    currentTheme = theme;
-    updateThemeIcon(theme);
-}
+let currentTheme = localStorage.getItem('theme') || 'dark';
 
 function toggleTheme() {
-    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-    applyTheme(newTheme);
-}
-
-function updateThemeIcon(theme) {
-    const themeToggle = document.querySelector('.theme-toggle');
-    if (themeToggle) {
-        if (theme === 'light') {
-            themeToggle.innerHTML = '<i class="bx bx-moon"></i>';
-            themeToggle.title = 'Modo Oscuro';
-        } else {
-            themeToggle.innerHTML = '<i class="bx bx-sun"></i>';
-            themeToggle.title = 'Modo Claro';
-        }
+    currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    localStorage.setItem('theme', currentTheme);
+    applyTheme();
+    
+    // Actualizar textos del idioma actual después de cambiar tema
+    if (typeof updateTexts === 'function') {
+        updateTexts();
+        updatePlaceholders();
     }
 }
 
-function detectSystemTheme() {
-    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        return 'dark';
+function applyTheme() {
+    if (currentTheme === 'light') {
+        document.body.classList.add('light-theme');
+        // Modo claro: morado suave como acento
+        document.documentElement.style.setProperty('--accent', '#b0a0e0');
+        document.documentElement.style.setProperty('--accent-dim', 'rgba(176, 160, 224, 0.15)');
+        document.documentElement.style.setProperty('--accent-glow', 'rgba(176, 160, 224, 0.3)');
+        document.documentElement.style.setProperty('--bg-deep', '#f5f7fc');
+        document.documentElement.style.setProperty('--bg-base', '#ffffff');
+        document.documentElement.style.setProperty('--bg-panel', '#f0f2f5');
+        document.documentElement.style.setProperty('--bg-card', 'rgba(0, 0, 0, 0.03)');
+        document.documentElement.style.setProperty('--bg-card-hover', 'rgba(0, 0, 0, 0.06)');
+        document.documentElement.style.setProperty('--text', '#1a1a2e');
+        document.documentElement.style.setProperty('--text-muted', 'rgba(0, 0, 0, 0.6)');
+        document.documentElement.style.setProperty('--text-faint', 'rgba(0, 0, 0, 0.4)');
+        document.documentElement.style.setProperty('--border', 'rgba(0, 0, 0, 0.08)');
+        document.documentElement.style.setProperty('--border-accent', 'rgba(176, 160, 224, 0.25)');
+        
+        // Cambiar icono del tema
+        const themeIcon = document.querySelector('.theme-toggle i');
+        if (themeIcon) themeIcon.className = 'bx bx-sun';
+    } else {
+        document.body.classList.remove('light-theme');
+        // Modo oscuro: verde neón como acento
+        document.documentElement.style.setProperty('--accent', '#00ff4c');
+        document.documentElement.style.setProperty('--accent-dim', 'rgba(0, 255, 76, 0.15)');
+        document.documentElement.style.setProperty('--accent-glow', 'rgba(0, 255, 76, 0.4)');
+        document.documentElement.style.setProperty('--bg-deep', '#060610');
+        document.documentElement.style.setProperty('--bg-base', '#0a0a1a');
+        document.documentElement.style.setProperty('--bg-panel', '#0f0f22');
+        document.documentElement.style.setProperty('--bg-card', 'rgba(255, 255, 255, 0.04)');
+        document.documentElement.style.setProperty('--bg-card-hover', 'rgba(255, 255, 255, 0.08)');
+        document.documentElement.style.setProperty('--text', '#e8e8f0');
+        document.documentElement.style.setProperty('--text-muted', 'rgba(255, 255, 255, 0.55)');
+        document.documentElement.style.setProperty('--text-faint', 'rgba(255, 255, 255, 0.3)');
+        document.documentElement.style.setProperty('--border', 'rgba(255, 255, 255, 0.08)');
+        document.documentElement.style.setProperty('--border-accent', 'rgba(0, 255, 76, 0.25)');
+        
+        // Cambiar icono del tema
+        const themeIcon = document.querySelector('.theme-toggle i');
+        if (themeIcon) themeIcon.className = 'bx bx-moon';
     }
-    return 'light';
 }
 
 function initTheme() {
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme && themes[savedTheme]) {
-        applyTheme(savedTheme);
-    } else {
-        applyTheme(detectSystemTheme());
-    }
-    window.toggleTheme = toggleTheme;
-window.initTheme = initTheme;
+    applyTheme();
 }
+
+document.addEventListener('DOMContentLoaded', initTheme);

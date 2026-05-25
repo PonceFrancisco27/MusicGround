@@ -1,4 +1,4 @@
-/* fusion.css - Estilos para login/registro */
+/* artist-login.css - Estilos para el login de artistas */
 
 .back-home {
     position: fixed;
@@ -28,7 +28,6 @@
     color: var(--bg-deep);
 }
 
-/* Modo claro - back-link más visible */
 body.light-theme .back-link {
     background: rgba(0, 0, 0, 0.15);
     backdrop-filter: blur(10px);
@@ -85,18 +84,16 @@ body.light-theme #login-view .container {
     box-shadow: 0 25px 45px rgba(0, 0, 0, 0.1);
 }
 
-/* ANIMACIÓN DE CAMBIO ENTRE FORMULARIOS - SIN SUPERPOSICIÓN */
+/* Animación de cambio entre formularios */
 .form-container {
     position: absolute;
     top: 0;
     height: 100%;
     transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    /* Prevenir que se vea el contenido durante la transición */
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
 }
 
-/* Ocultar el formulario que se está moviendo durante la transición */
 .form-container.sign-in-container,
 .form-container.sign-up-container {
     transition: transform 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55), opacity 0.3s ease;
@@ -129,7 +126,6 @@ body.light-theme #login-view .container {
     visibility: visible;
 }
 
-/* Hacer que los formularios tengan fondo sólido durante la transición */
 form {
     background: rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(10px);
@@ -140,7 +136,6 @@ form {
     padding: 0 50px;
     height: 100%;
     text-align: center;
-    /* Evitar que se vea el fondo durante la transición */
     will-change: transform;
 }
 
@@ -232,10 +227,53 @@ body.light-theme form input::placeholder {
     color: rgba(0, 0, 0, 0.4);
 }
 
-form button {
+/* Estilos específicos para artistas */
+.artist-badge-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: var(--accent-dim);
+    padding: 6px 16px;
+    border-radius: 30px;
+    margin-bottom: 15px;
+}
+
+.artist-badge-header i {
+    font-size: 16px;
+    color: var(--accent);
+}
+
+.artist-badge-header span {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--accent);
+}
+
+.artist-benefits-list {
+    margin: 15px 0;
+    text-align: left;
+    width: 100%;
+}
+
+.benefit-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 0;
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+.benefit-item i {
+    color: var(--accent);
+    font-size: 16px;
+}
+
+.artist-register-btn {
     border-radius: 2rem;
     border: none;
-    background: linear-gradient(135deg, var(--accent), var(--accent));
+    background: linear-gradient(135deg, #ff00cc, #333399);
     color: white;
     font-size: 0.8rem;
     font-weight: 700;
@@ -246,36 +284,74 @@ form button {
     cursor: pointer;
     margin-top: 10px;
     font-family: var(--font-body);
+    width: 100%;
 }
 
-body.light-theme form button {
-    color: white;
-    background: linear-gradient(135deg, #c084fc, #a855f7);
-    box-shadow: 0 2px 10px rgba(160, 100, 200, 0.3);
+.artist-register-btn:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 15px rgba(255, 0, 204, 0.5);
 }
 
-form button:hover {
+.artist-login-btn {
+    border-radius: 2rem;
+    border: none;
+    background: linear-gradient(135deg, var(--accent), #00cc3d);
+    color: var(--bg-deep);
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 12px 45px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    margin-top: 10px;
+    font-family: var(--font-body);
+    width: 100%;
+}
+
+.artist-login-btn:hover {
     transform: scale(1.02);
     box-shadow: 0 0 15px var(--accent-glow);
 }
 
-form a {
-    color: rgba(255, 255, 255, 0.6);
-    font-size: 0.7rem;
-    text-decoration: none;
-    margin: 10px 0;
-    transition: color 0.3s ease;
+.artist-info-note {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 15px;
+    padding: 8px 12px;
+    background: var(--accent-dim);
+    border-radius: 30px;
+    font-size: 11px;
+    color: var(--text-muted);
 }
 
-body.light-theme form a {
-    color: rgba(0, 0, 0, 0.5);
-}
-
-form a:hover {
+.artist-info-note i {
+    font-size: 14px;
     color: var(--accent);
 }
 
-/* ANIMACIÓN DEL OVERLAY */
+.form-note {
+    font-size: 11px;
+    color: var(--text-faint);
+    margin-top: 15px;
+}
+
+.form-note a {
+    color: var(--accent);
+    text-decoration: none;
+}
+
+body.light-theme .artist-register-btn {
+    box-shadow: 0 2px 10px rgba(255, 0, 204, 0.3);
+}
+
+body.light-theme .artist-info-note {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+/* Overlay */
 .overlay-container {
     position: absolute;
     top: 0;

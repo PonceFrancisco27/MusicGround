@@ -5,7 +5,7 @@ const translations = {
         // Navegación
         back_home: "Volver al inicio",
         
-        // Login/Registro
+        // Login/Registro General
         create_account: "Crear Cuenta",
         or_use_email: "O usa un email asociado para registrar",
         name: "Nombre",
@@ -21,13 +21,28 @@ const translations = {
         hello_artist: "¿Nuevo en MusicGround?",
         hello_artist_desc: "Únete a nuestra comunidad y descubre millones de canciones sin límites.",
         sign_in_btn: "Iniciar Sesión",
-        sign_up_btn: "Crear Cuenta"
+        sign_up_btn: "Crear Cuenta",
+        
+        // Artista Login específico
+        create_artist_account: "Crear Cuenta de Artista",
+        artist_benefits: "Distribuye tu música, monetiza y llega a más oyentes",
+        benefit_upload: "Subidas ilimitadas",
+        benefit_royalties: "70% de regalías",
+        benefit_stats: "Estadísticas en tiempo real",
+        become_artist: "Convertirse en Artista →",
+        artist_note: "Al registrarte, aceptas nuestros Términos para Artistas",
+        artist_sign_in_title: "Acceso Artistas",
+        artist_note_access: "Acceso exclusivo para artistas registrados en MusicGround",
+        artist_welcome_back: "¿Ya eres artista?",
+        artist_welcome_desc: "Inicia sesión para acceder a tu panel de control, subir música y ver tus estadísticas.",
+        artist_new: "¿Nuevo artista?",
+        artist_new_desc: "Únete a MusicGround y comparte tu música con el mundo. Distribuye, monetiza y crece."
     },
     en: {
         // Navigation
         back_home: "Back to home",
         
-        // Login/Register
+        // Login/Register General
         create_account: "Create Account",
         or_use_email: "Or use email to register",
         name: "Name",
@@ -43,7 +58,22 @@ const translations = {
         hello_artist: "New to MusicGround?",
         hello_artist_desc: "Join our community and discover millions of songs without limits.",
         sign_in_btn: "Sign In",
-        sign_up_btn: "Sign Up"
+        sign_up_btn: "Sign Up",
+        
+        // Artist Login specific
+        create_artist_account: "Create Artist Account",
+        artist_benefits: "Distribute your music, monetize and reach more listeners",
+        benefit_upload: "Unlimited uploads",
+        benefit_royalties: "70% royalties",
+        benefit_stats: "Real-time statistics",
+        become_artist: "Become an Artist →",
+        artist_note: "By registering, you agree to our Artist Terms",
+        artist_sign_in_title: "Artist Access",
+        artist_note_access: "Exclusive access for artists registered on MusicGround",
+        artist_welcome_back: "Already an artist?",
+        artist_welcome_desc: "Sign in to access your dashboard, upload music and view your statistics.",
+        artist_new: "New artist?",
+        artist_new_desc: "Join MusicGround and share your music with the world. Distribute, monetize and grow."
     }
 };
 
@@ -75,8 +105,6 @@ function updatePlaceholders() {
         }
     });
 }
-
-
 
 function initLanguage() {
     updateTexts();
